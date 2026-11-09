@@ -154,3 +154,4 @@ export function useApp() {
   if (!context) throw new Error("useApp must be used within AppProvider");
   return context;
 }
+

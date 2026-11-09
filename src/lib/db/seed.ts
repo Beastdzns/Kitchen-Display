@@ -715,3 +715,4 @@ export function runSeed() {
 if (require.main === module || process.argv[1]?.includes("seed.ts")) {
   runSeed();
 }
+

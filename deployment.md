@@ -125,3 +125,4 @@ As mandated by the submission rules, only variable names are listed below (never
 * **Input Validation & Sanitization**: Strict input bounds checking on party order guest counts ($\ge 15$), advance notice dates ($\ge 24\text{h}$), and phone number formats.
 * **DPDP Act 2023 Compliance**: Customer phone numbers and order histories are stored with explicit opt-in consent records. No third-party data tracking scripts.
 * **FSSAI Compliance**: Official FSSAI license numbers mapped and displayed for all 17 Hyderabad locations.
+

@@ -95,3 +95,4 @@ app.prepare().then(() => {
     console.log(`> 🔌 Real-time WebSockets active on ws://${hostname}:${port}`);
   });
 });
+

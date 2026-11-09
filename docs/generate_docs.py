@@ -523,3 +523,4 @@ Promised Time = MAX(Outlet Min Prep Time, Base Prep × (1 + Active Tickets / (St
 if __name__ == "__main__":
     generate_docx()
     generate_pdf()
+

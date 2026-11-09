@@ -230,3 +230,4 @@ The client brief emphasized: *"The client values good, minimal design: clean lay
 1. **LightGBM Trained Model Integration**: Transition from the current load-physics model to a trained LightGBM regressor once 100,000 real orders are logged.
 2. **Dynamic Delivery Fee Distance Tiering**: Integration with Google Maps Distance Matrix API for dynamic rider surge pricing.
 3. **WhatsApp Conversational Bot (Meta Cloud API)**: Enable direct reordering via WhatsApp text message using Gemini Function Calling.
+

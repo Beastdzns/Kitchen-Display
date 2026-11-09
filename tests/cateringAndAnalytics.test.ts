@@ -45,3 +45,4 @@ describe("Catering Constraints & Business Analytics Model", () => {
     expect(totalCr).toBeCloseTo(1.1448, 3);
   });
 });
+

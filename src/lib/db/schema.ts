@@ -163,3 +163,4 @@ export const loyaltyLedger = sqliteTable("loyalty_ledger", {
   reason: text("reason").notNull(),
   createdAt: text("created_at").notNull(),
 });
+

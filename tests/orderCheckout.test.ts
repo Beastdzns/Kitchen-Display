@@ -35,3 +35,4 @@ describe("Direct Order Checkout & DPDP Compliance", () => {
     expect(sumPoints).toBeGreaterThan(0);
   });
 });
+

@@ -45,3 +45,4 @@ describe("Pricing, Inclusive 5% GST & Loyalty Engine", () => {
     expect(pricing.earnedLoyaltyPoints).toBe(59);
   });
 });
+

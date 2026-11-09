@@ -1,128 +1,74 @@
-# Deployment & Reviewer Guide: Company A Platform
+# Deployment and Reviewer Guide
 
-**Project**: Company A - Hyderabadi Biryani & Cloud Kitchen Operations Platform  
-**GitHub Repository**: `https://github.com/company-a/direct-ordering-platform`  
-**Live Production URL**: `https://companya-hyderabad.vercel.app` *(or locally at `http://localhost:3000`)*  
+**GitHub repository:** https://github.com/Beastdzns/Kitchen-Display
+**Live application:** Not deployed.
 
----
+> The submission archive contains only the requested TDD PDF and this guide. These steps assume you have the project source separately and run commands from its root directory.
 
-## 1. Quick Step-by-Step Local Setup
-
-Follow these exact steps to run the complete platform locally on Linux, macOS, or Windows:
+## Run locally
 
 ### Prerequisites
-* **Node.js**: Version 18.x, 20.x, or 24.x
-* **npm**: Version 9.x or higher
-* **Git**
 
-### Step 1: Clone Repository & Install Dependencies
-```bash
-git clone https://github.com/company-a/direct-ordering-platform.git
-cd direct-ordering-platform
-npm install
-```
+- Node.js 18.18 or newer (Node.js 20 LTS recommended)
+- npm
 
-### Step 2: Seed Database with Authentic Hyderabad & Brief Data
-Run the database seed script to populate all 17 Hyderabad locations (14 outlets + 3 cloud kitchens), 16 authentic menu items, and the exact sample orders from the brief (`WEB-778120`, `WEB-778131`, `WEB-778146`):
-```bash
-npm run db:seed
-```
+### Steps
 
-### Step 3: Run Automated Test Suite
-Run the 25 comprehensive Vitest tests verifying the AI prep formula, inclusive 5% GST arithmetic, coupon logic, DPDP consent, 86-ing cascade, and KDS operations:
-```bash
-npm test
-```
-*Expected output: 6 test files passed, 25 tests passed (100%).*
+1. Open a terminal in the project source directory.
+2. Install dependencies:
 
-### Step 4: Start Unified Application & Real-Time WebSocket Server
-Start the unified Next.js + Socket.io server on a single port:
-```bash
-npm run dev
-```
+   ```bash
+   npm install
+   ```
 
-The application is now live at:
-👉 **`http://localhost:3000`**
+3. If you need a fresh demo database, seed it:
 
----
+   ```bash
+   npm run db:seed
+   ```
 
-## 2. Reviewer Demo Personas & Login Credentials
+   **Warning:** Seeding resets the existing local demo records. Do not run this against a database containing data you need to keep.
 
-A **Reviewer Demo Switcher Bar** is permanently pinned to the top of every screen for instant 1-click persona switching:
+4. Start the development server:
 
-| Persona | Name | Role | Mobile Number | Purpose in Review |
-| :--- | :--- | :--- | :--- | :--- |
-| **Customer** | Amina Khan | `CUSTOMER` | `+91 98490 12345` | Has 340 loyalty points, past order history, personalized AI reorder recommendations, and live order tracking. |
-| **Kitchen Tablet (Kondapur)** | Chef Imran | `KITCHEN_STAFF` | `+91 98490 55001` | Tablet-optimized 2m readable KDS. Live sample ticket `WEB-778120` (`PREPARING`). Advance status and manager overrides. |
-| **Kitchen Tablet (Kukatpally)** | Chef Sameer | `KITCHEN_STAFF` | `+91 98490 55002` | Demonstrates the brief's sample late order `WEB-778146` ("Late by 4 minutes" with pulsing red urgency badge). |
-| **Central Admin** | Vikram Reddy | `ADMIN` | `+91 98490 99999` | Central Menu CMS, real-time 86-ing toggles, time-based menus, and FSSAI license directory. |
-| **Catering Manager** | Farhan Siddiqui | `CATERING_MANAGER` | `+91 98490 77777` | Party & Bulk Dawat Desk. Confirms incoming 15+ pax inquiries (e.g. `PARTY-9021`). |
+   ```bash
+   npm run dev
+   ```
 
-*Note: You can also click the **"Sign In / OTP"** button in the top bar to test realistic OTP authentication (demo OTP: `5520`).*
+5. Open [http://localhost:3000](http://localhost:3000). The Next.js app and Socket.IO server run together. Stop the server with `Ctrl+C`.
 
----
+To run the tests, use `npm test`. To build and start the production-mode Node server, run:
 
-## 3. Pre-Seeded Sample Flows to Review
-
-### 1. Test Kitchen Display System (KDS) & Real-Time Sync
-1. Open **`http://localhost:3000/kds`** (or click *KDS Tablet (Kondapur)* in top bar).
-2. Note order `WEB-778120` (Chicken dum biryani family pack x1, Double ka meetha x2, ₹1,180) in `PREPARING` stage.
-3. Switch outlet dropdown to **Kukatpally Outlet** to inspect sample `WEB-778146` (Mutton haleem x3, ₹1,050) marked with a pulsing red **"LATE"** alert.
-4. Click **"Simmer on Dum"** or **"Mark Ready for Pickup"**—status updates instantly.
-5. In another tab, open `http://localhost:3000/order/WEB-778120` to watch the customer's tracking screen update in real time via WebSockets!
-
-### 2. Test Customer Ordering & Sub-60s Checkout
-1. Visit **`http://localhost:3000`**, choose **Kondapur** or use GPS.
-2. Click **"Explore Hyderabad Menu"**.
-3. Notice the **AI Reorder Suggestions** card for Amina Khan (derived from past order frequency). *Notice guardrail: Items are never auto-added to cart.*
-4. Add items to cart. Navigate to `/cart`.
-5. Apply coupon `DIRECT10` (10% off) or `HYDFIRST` (₹100 off).
-6. Click **"Redeem Max"** loyalty points to apply up to 20% discount from Amina's points ledger.
-7. Observe the statutory disclosure: **"Inclusive of 5% GST (CGST 2.5% + SGST 2.5%)"**.
-8. Ensure the **DPDP Act 2023 Consent** checkbox is checked.
-9. Click **"Place Order"** with Test UPI or Card.
-10. Observe redirection to the live tracking screen with real-time countdown, transparent AI load explanation, and simulated WhatsApp audit log!
-
-### 3. Test Real-Time 86-ing (Item Out-of-Stock)
-1. Open Central Menu CMS at **`http://localhost:3000/admin/menu`**.
-2. Click **"86'd (Paused)"** on any dish (e.g. *Hyderabadi Subz Dum Biryani*).
-3. Switch to the customer menu tab (`/menu`)—the dish is immediately disabled with a "Sold Out at Kondapur" badge without any page reload!
-
-### 4. Test Bulk Party & Catering Flow
-1. Visit **`http://localhost:3000/catering`**.
-2. Notice the enforced constraints: minimum 15 guests and minimum 24-hour advance notice.
-3. Submit a catering request for 30 guests.
-4. Navigate to **`http://localhost:3000/catering/desk`** to review, adjust quotes, add chef notes, and confirm the booking.
-
----
-
-## 4. Production Deployment & Environment Variables
-
-### Production Hosting Architecture
-The application is packaged as a standard containerized Node.js application or deployable on Vercel, Railway, or AWS EC2:
 ```bash
 npm run build
 npm start
 ```
 
-### Environment Variables (Names Only)
-As mandated by the submission rules, only variable names are listed below (never credentials or values):
+The SQLite database is `sqlite.db` in the project root. Keep that file writable and persistent for the lifetime of the app.
 
-| Variable Name | Purpose |
-| :--- | :--- |
-| `PORT` | HTTP & WebSocket listener port (default: `3000`) |
-| `HOST` | Network interface binding host (default: `0.0.0.0`) |
-| `NODE_ENV` | Environment mode (`development` or `production`) |
-| `DATABASE_URL` | SQLite database file location path |
-| `NEXT_PUBLIC_APP_URL` | Canonical public domain URL for customer tracking links |
-| `NEXT_PUBLIC_SOCKET_URL` | Real-time WebSocket server endpoint |
+## Deployment notes
 
----
+No hosted deployment is configured for this submission. A production host would need to support the custom Node.js server, WebSocket connections, and persistent writable storage for SQLite. A serverless deployment without those properties is not suitable without changing the architecture.
 
-## 5. Security & DPDP Compliance Summary
+## Environment variables
 
-* **No Secrets in Repository**: No API keys, passwords, or cloud credentials stored in codebase or repository.
-* **Input Validation & Sanitization**: Strict input bounds checking on party order guest counts ($\ge 15$), advance notice dates ($\ge 24\text{h}$), and phone number formats.
-* **DPDP Act 2023 Compliance**: Customer phone numbers and order histories are stored with explicit opt-in consent records. No third-party data tracking scripts.
-* **FSSAI Compliance**: Official FSSAI license numbers mapped and displayed for all 17 Hyderabad locations.
+Only these server variables are read by the application; defaults are used if they are omitted:
 
+| Name | Purpose |
+|---|---|
+| `PORT` | HTTP and WebSocket listener port; defaults to `3000`. |
+| `HOST` | Network interface to bind; defaults to `0.0.0.0`. |
+| `NODE_ENV` | Selects development or production mode. |
+
+No production payment, database, or messaging credentials are required by the demo. Do not add secret values to the repository.
+
+## Reviewer demo access
+
+There is no production authentication or password. Use the role switcher at the top of the app; the buttons open the corresponding demo surfaces:
+
+- **Customer:** select Customer, then use the home page and menu.
+- **Kitchen:** select KDS Tablet (Kondapur), or choose another outlet in the KDS screen.
+- **Central admin:** select Central Admin to open menu administration.
+- **Catering manager:** select Catering Desk.
+
+The sign-in/OTP panel is simulated; no real phone number or password is needed. Demo personas, order records, and contact values are placeholders. Review sample orders `WEB-778120`, `WEB-778131`, and `WEB-778146`, and sample catering request `PARTY-9021`.

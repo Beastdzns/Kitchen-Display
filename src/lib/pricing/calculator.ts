@@ -17,6 +17,14 @@ export interface CouponRule {
 }
 
 export const AVAILABLE_COUPONS: Record<string, CouponRule> = {
+  DIWALI20: {
+    code: "DIWALI20",
+    description: "Diwali Festive Dawat: 20% off on orders above ₹400 (up to ₹200)",
+    discountType: "PERCENTAGE",
+    discountValue: 20,
+    minOrderValue: 400,
+    maxDiscount: 200,
+  },
   DIRECT10: {
     code: "DIRECT10",
     description: "10% off on all direct orders (up to ₹150)",
@@ -126,4 +134,3 @@ export function calculateOrderPricing(
     gstLabel: "Inclusive of 5% GST (CGST 2.5% + SGST 2.5%)",
   };
 }
-

@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { DEMO_USERS, HyderabadOutletSeed, HYDERABAD_OUTLETS } from "@/lib/constants";
+import { kitchenSound } from "@/lib/sound";
 
 export interface CartItem {
   id: string;
@@ -13,9 +14,21 @@ export interface CartItem {
   isVeg?: number;
 }
 
+export interface RoleSwitchNotification {
+  user: any;
+  title: string;
+  badge: string;
+  description: string;
+  color: string;
+  timestamp: number;
+}
+
 interface AppContextType {
   currentUser: any;
   setCurrentUser: (user: any) => void;
+  switchPersona: (user: any) => void;
+  roleSwitchNotice: RoleSwitchNotification | null;
+  dismissRoleSwitchNotice: () => void;
   selectedOutlet: HyderabadOutletSeed;
   setSelectedOutlet: (outlet: HyderabadOutletSeed) => void;
   cart: CartItem[];
@@ -35,6 +48,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [currentUser, setCurrentUser] = useState<any>(DEMO_USERS[0]); // Default to Amina Khan
+  const [roleSwitchNotice, setRoleSwitchNotice] = useState<RoleSwitchNotification | null>(null);
   const [selectedOutlet, setSelectedOutlet] = useState<HyderabadOutletSeed>(HYDERABAD_OUTLETS[0]); // Default Kondapur
   const [cart, setCart] = useState<CartItem[]>([]);
   const [appliedCoupon, setAppliedCoupon] = useState<string>("");
@@ -59,6 +73,59 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     try {
       localStorage.setItem("companyA_user", JSON.stringify(user));
     } catch (e) {}
+  };
+
+  const switchPersona = (user: any) => {
+    handleSetUser(user);
+
+    // Provide rich contextual description of capabilities
+    let title = user.name;
+    let badge = user.role;
+    let description = "";
+    let color = "amber";
+
+    if (user.role === "CUSTOMER") {
+      title = `${user.name} (Direct Customer)`;
+      badge = "Verified Regular • 340 Loyalty Pts";
+      description = "Browsing menu with personalized AI reorders, 5% direct cashback, and live order tracking.";
+      color = "amber";
+    } else if (user.role === "KITCHEN_STAFF") {
+      title = `${user.name} (Kitchen Chef Tablet)`;
+      badge = "KDS Tablet Mode • 2m Distance UI";
+      description = "Simmer pots, transition prep stages (New → Preparing → Ready → Handoff), and override timers.";
+      color = "orange";
+    } else if (user.role === "ADMIN") {
+      title = `${user.name} (Central Head)`;
+      badge = "Central Menu CMS & 86-ing Desk";
+      description = "Global & outlet pricing control, real-time item pausing (86-ing), and multi-outlet performance analytics.";
+      color = "purple";
+    } else if (user.role === "CATERING_MANAGER") {
+      title = `${user.name} (Catering Lead)`;
+      badge = "Bulk & Corporate Dawat Desk";
+      description = "Reviewing 15+ pax inquiries, customizing handi allocations, and locking booking quotes.";
+      color = "emerald";
+    }
+
+    setRoleSwitchNotice({
+      user,
+      title,
+      badge,
+      description,
+      color,
+      timestamp: Date.now(),
+    });
+
+    // Play pleasant role-switch chime
+    kitchenSound.playRoleSwitchChime();
+
+    // Auto dismiss after 2.8s
+    setTimeout(() => {
+      setRoleSwitchNotice((curr) => (curr && curr.user.id === user.id ? null : curr));
+    }, 2800);
+  };
+
+  const dismissRoleSwitchNotice = () => {
+    setRoleSwitchNotice(null);
   };
 
   const handleSetOutlet = (outlet: HyderabadOutletSeed) => {
@@ -129,6 +196,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       value={{
         currentUser,
         setCurrentUser: handleSetUser,
+        switchPersona,
+        roleSwitchNotice,
+        dismissRoleSwitchNotice,
         selectedOutlet,
         setSelectedOutlet: handleSetOutlet,
         cart,
@@ -154,4 +224,3 @@ export function useApp() {
   if (!context) throw new Error("useApp must be used within AppProvider");
   return context;
 }
-

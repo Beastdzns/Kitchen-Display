@@ -15,6 +15,8 @@ import {
   Check,
   Search,
   Filter,
+  Gift,
+  Tag,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -42,7 +44,7 @@ interface Category {
 }
 
 export default function MenuPage() {
-  const { selectedOutlet, cart, addToCart, updateQuantity, cartCount, cartTotal, currentUser } = useApp();
+  const { selectedOutlet, cart, addToCart, updateQuantity, cartCount, cartTotal, currentUser, setAppliedCoupon } = useApp();
   const [categories, setCategories] = useState<Category[]>([]);
   const [items, setItems] = useState<MenuItem[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>("all");
@@ -70,7 +72,6 @@ export default function MenuPage() {
     fetchMenu(selectedOutlet.id);
 
     // AI Reorder Suggestions calculation for current user
-    // Mock customer past orders for Amina
     const pastOrders = [
       {
         placedAt: "2026-11-01T20:14:00",
@@ -127,49 +128,49 @@ export default function MenuPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-[#0e1014] text-gray-100 min-h-screen">
-      {/* Top Menu Banner & Outlet Info */}
-      <div className="bg-[#151720] border-b border-gray-800 px-4 sm:px-6 lg:px-8 py-6">
+    <div className="flex-1 flex flex-col bg-diwali-pattern text-gray-100 min-h-screen">
+      {/* Top Menu Banner & Outlet Info with Diwali Amber Styling */}
+      <div className="bg-[#150d1d] border-b-2 border-amber-500/40 px-4 sm:px-6 lg:px-8 py-6 shadow-xl">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">
-              <Flame className="w-4 h-4 text-amber-500" />
-              <span>Direct From Kitchen Degh</span>
+            <div className="flex items-center gap-2 text-xs font-bold text-amber-300 uppercase tracking-wider mb-1">
+              <span className="text-base diya-glow">🪔</span>
+              <span>Diwali Festive Feast • Direct From Degh</span>
             </div>
             <h1 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
-              Hyderabad Royal Menu
+              Hyderabad Royal Menu & Shahi Mithai
             </h1>
-            <p className="text-xs text-gray-400 mt-1 flex items-center gap-2">
-              <span>Delivering from: <strong className="text-gray-200">{selectedOutlet.name}</strong></span>
+            <p className="text-xs text-gray-400 mt-1 flex flex-wrap items-center gap-2">
+              <span>Delivering from: <strong className="text-amber-300">{selectedOutlet.name}</strong></span>
               <span>•</span>
               <span className="text-emerald-400 font-mono">FSSAI #{selectedOutlet.fssaiNumber}</span>
               <span>•</span>
-              <span className="text-amber-400">All prices inclusive of 5% GST</span>
+              <span className="text-amber-400 font-semibold">All prices inclusive of 5% GST</span>
             </p>
           </div>
 
-          {/* Search & Veg Filter */}
+          {/* Search, Veg Filter, and Diwali Coupon Pill */}
           <div className="flex items-center gap-3">
             <div className="relative flex-1 sm:w-64">
               <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search biryani, starters..."
+                placeholder="Search biryani, mithai..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#1e222d] border border-gray-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-gray-400 focus:outline-none focus:border-amber-500"
+                className="w-full bg-[#231530] border border-gray-700/80 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-gray-400 focus:outline-none focus:border-amber-400"
               />
             </div>
 
             <button
               onClick={() => setVegOnly(!vegOnly)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition border ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition border ${
                 vegOnly
-                  ? "bg-emerald-950/80 text-emerald-300 border-emerald-500/50"
-                  : "bg-[#1e222d] text-gray-400 border-gray-700 hover:text-white"
+                  ? "bg-emerald-950/80 text-emerald-300 border-emerald-500/60 shadow-md"
+                  : "bg-[#231530] text-gray-400 border-gray-700/80 hover:text-white"
               }`}
             >
-              <span className="w-3 h-3 rounded-full border border-emerald-500 flex items-center justify-center p-0.5">
+              <span className="w-3.5 h-3.5 rounded-full border border-emerald-500 flex items-center justify-center p-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
               </span>
               <span>Veg Only</span>
@@ -178,13 +179,45 @@ export default function MenuPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+        {/* Diwali Festive Dawat Promotion Banner */}
+        <div className="bg-gradient-to-r from-red-950/60 via-amber-950/60 to-orange-950/60 border-2 border-amber-500/50 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+          <div className="flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-400/40 text-2xl diya-glow">
+              🪔
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="font-serif text-base font-bold text-white">
+                  Shubh Deepavali Special Offer
+                </h3>
+                <span className="text-[10px] uppercase font-mono font-extrabold bg-red-600/40 text-red-200 px-2 py-0.5 rounded border border-red-500/40">
+                  Flat 20% Off
+                </span>
+              </div>
+              <p className="text-xs text-gray-300 mt-0.5">
+                Apply coupon <strong className="text-amber-300 font-mono">DIWALI20</strong> at checkout for 20% off on all royal handis & Shahi mithai!
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => {
+              setAppliedCoupon("DIWALI20");
+              alert("Coupon DIWALI20 applied! You will receive 20% off at checkout.");
+            }}
+            className="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-black font-extrabold px-4 py-2 rounded-xl text-xs transition shadow-md shadow-amber-500/20 shrink-0"
+          >
+            Apply DIWALI20
+          </button>
+        </div>
+
         {/* AI "Order Again" Personalization Section (Guardrail: Never auto-adds to cart) */}
         {aiSuggestions.length > 0 && !searchQuery && (
-          <section className="bg-gradient-to-r from-[#1a1c26] via-[#161822] to-[#1a1c26] border border-amber-500/30 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+          <section className="bg-gradient-to-r from-[#1c1228] via-[#160d20] to-[#1c1228] border-2 border-amber-500/40 rounded-2xl p-6 shadow-xl relative overflow-hidden">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center border border-amber-500/30">
                   <Sparkles className="w-4 h-4 text-amber-400" />
                 </div>
                 <div>
@@ -196,7 +229,7 @@ export default function MenuPage() {
                   </p>
                 </div>
               </div>
-              <span className="text-[10px] font-mono bg-black/40 text-amber-300 px-2.5 py-1 rounded-md border border-amber-500/20">
+              <span className="text-[10px] font-mono bg-black/40 text-amber-300 px-2.5 py-1 rounded-md border border-amber-500/30 font-semibold">
                 Guardrail: Click Add to select
               </span>
             </div>
@@ -210,11 +243,11 @@ export default function MenuPage() {
                 return (
                   <div
                     key={sug.menuItemId}
-                    className="bg-[#202432] border border-gray-700/80 hover:border-amber-500/50 p-4 rounded-xl flex items-center justify-between gap-3 transition"
+                    className="bg-[#241733] border border-amber-500/30 hover:border-amber-400 p-4 rounded-xl flex items-center justify-between gap-3 transition shadow-md"
                   >
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded">
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/30">
                           {sug.badgeText}
                         </span>
                         <span className="text-[11px] font-mono text-gray-400">
@@ -223,7 +256,7 @@ export default function MenuPage() {
                       </div>
                       <div className="text-sm font-bold text-white leading-tight">{sug.itemName}</div>
                       <p className="text-[11px] text-gray-400 mt-1 line-clamp-1">{sug.reason}</p>
-                      <div className="text-xs font-mono font-bold text-amber-400 mt-2">
+                      <div className="text-xs font-mono font-bold text-amber-300 mt-2">
                         ₹{menuItem.price}{" "}
                         <span className="text-[10px] font-normal text-gray-400">(Incl. GST)</span>
                       </div>
@@ -247,7 +280,7 @@ export default function MenuPage() {
                           disabled={!menuItem.isAvailable}
                           className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-md ${
                             menuItem.isAvailable
-                              ? "bg-amber-500 hover:bg-amber-400 text-black shadow-amber-500/20"
+                              ? "bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-black shadow-amber-500/20"
                               : "bg-gray-800 text-gray-500 cursor-not-allowed"
                           }`}
                         >
@@ -255,7 +288,7 @@ export default function MenuPage() {
                           <span>{menuItem.isAvailable ? "Add" : "Paused"}</span>
                         </button>
                       ) : (
-                        <div className="flex items-center gap-2 bg-[#171922] border border-amber-500/50 px-2 py-1 rounded-lg">
+                        <div className="flex items-center gap-2 bg-[#170f22] border border-amber-500/60 px-2 py-1 rounded-lg">
                           <button
                             onClick={() => updateQuantity(menuItem.id, -1)}
                             className="text-amber-400 hover:text-white p-0.5"
@@ -281,14 +314,14 @@ export default function MenuPage() {
           </section>
         )}
 
-        {/* Category Navigation Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-800">
+        {/* Category Navigation Pills with Clear Demarcations & Active Glow */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b-2 border-gray-800">
           <button
             onClick={() => setActiveCategory("all")}
-            className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition border ${
               activeCategory === "all"
-                ? "bg-amber-500 text-black shadow-md shadow-amber-500/20"
-                : "bg-[#181a24] text-gray-400 hover:text-white hover:bg-[#202330]"
+                ? "bg-gradient-to-r from-amber-400 to-orange-500 text-black border-amber-300 shadow-md shadow-amber-500/30"
+                : "bg-[#1c1226] text-gray-300 hover:text-white hover:bg-[#281a38] border-gray-700/80"
             }`}
           >
             All Royal Dishes ({items.length})
@@ -297,10 +330,10 @@ export default function MenuPage() {
             <button
               key={c.id}
               onClick={() => setActiveCategory(c.id)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition border ${
                 activeCategory === c.id
-                  ? "bg-amber-500 text-black shadow-md shadow-amber-500/20"
-                  : "bg-[#181a24] text-gray-400 hover:text-white hover:bg-[#202330]"
+                  ? "bg-gradient-to-r from-amber-400 to-orange-500 text-black border-amber-300 shadow-md shadow-amber-500/30"
+                  : "bg-[#1c1226] text-gray-300 hover:text-white hover:bg-[#281a38] border-gray-700/80"
               }`}
             >
               {c.name}
@@ -308,7 +341,7 @@ export default function MenuPage() {
           ))}
         </div>
 
-        {/* Food Items Grid (Hunger-inducing big photos, minimal clean typography) */}
+        {/* Food Items Grid (Hunger-inducing big photos, minimal clean typography, gold borders) */}
         {loading ? (
           <div className="py-24 text-center text-gray-500">
             <Flame className="w-8 h-8 animate-bounce text-amber-500 mx-auto mb-2" />
@@ -323,14 +356,17 @@ export default function MenuPage() {
             {filteredItems.map((item) => {
               const qty = getItemQuantity(item.id);
               const is86 = !item.isAvailable;
+              const isFestiveMithai = item.categoryId === "desserts";
 
               return (
                 <div
                   key={item.id}
-                  className={`bg-[#161822] border rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-xl ${
+                  className={`bg-[#170f22] border-2 rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-xl ${
                     is86
                       ? "border-red-900/40 opacity-70"
-                      : "border-gray-800 hover:border-gray-700 hover:shadow-2xl hover:shadow-amber-500/5"
+                      : isFestiveMithai
+                      ? "border-amber-400/60 shadow-amber-500/15"
+                      : "border-gray-800 hover:border-amber-500/40 hover:shadow-2xl hover:shadow-amber-500/5"
                   }`}
                 >
                   {/* Food Photo Container */}
@@ -345,7 +381,7 @@ export default function MenuPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
 
                     {/* Veg / Non-Veg Badge */}
-                    <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md p-1.5 rounded-lg border border-white/10 flex items-center gap-1.5">
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-md p-1.5 rounded-lg border border-white/10 flex items-center gap-1.5">
                       <div
                         className={`w-3.5 h-3.5 border-2 flex items-center justify-center p-0.5 ${
                           item.isVeg ? "border-emerald-500" : "border-red-500"
@@ -362,9 +398,14 @@ export default function MenuPage() {
                       </span>
                     </div>
 
-                    {/* Spice Level & Prep Badge */}
+                    {/* Festive Sweet or Spice Level Badge */}
                     <div className="absolute top-3 right-3 flex items-center gap-2">
-                      <span className="bg-black/70 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md border border-white/10 text-amber-400">
+                      {isFestiveMithai && (
+                        <span className="bg-gradient-to-r from-red-600 to-amber-600 text-white text-[10px] font-extrabold uppercase tracking-wider px-2 py-1 rounded-md shadow-md flex items-center gap-1">
+                          <span>🪔</span> Festive Mithai
+                        </span>
+                      )}
+                      <span className="bg-black/75 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md border border-white/10 text-amber-300">
                         {item.spiceLevel === "DUM_SPICY" ? "🔥 Dum Spicy" : item.spiceLevel}
                       </span>
                     </div>
@@ -387,10 +428,10 @@ export default function MenuPage() {
                           {item.name}
                         </h3>
                       </div>
-                      <div className="text-xs text-amber-400/90 font-medium mt-1">
+                      <div className="text-xs text-amber-400 font-medium mt-1">
                         {item.portionSize}
                       </div>
-                      <p className="text-xs text-gray-400 mt-2 leading-relaxed line-clamp-2">
+                      <p className="text-xs text-gray-300 mt-2 leading-relaxed line-clamp-2">
                         {item.description}
                       </p>
 
@@ -405,8 +446,8 @@ export default function MenuPage() {
                       )}
                     </div>
 
-                    {/* Price & Action Row */}
-                    <div className="mt-5 pt-4 border-t border-gray-800 flex items-center justify-between">
+                    {/* Price & Action Row with Clear Demarcations */}
+                    <div className="mt-5 pt-4 border-t border-gray-800/80 flex items-center justify-between">
                       <div>
                         <div className="text-xl font-mono font-extrabold text-white">
                           ₹{item.price}
@@ -434,7 +475,7 @@ export default function MenuPage() {
                             disabled={is86}
                             className={`px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wide transition flex items-center gap-1.5 shadow-md ${
                               !is86
-                                ? "bg-amber-500 hover:bg-amber-400 text-black shadow-amber-500/20 active:scale-95"
+                                ? "bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-black shadow-amber-500/20 active:scale-95"
                                 : "bg-gray-800 text-gray-500 cursor-not-allowed"
                             }`}
                           >
@@ -442,7 +483,7 @@ export default function MenuPage() {
                             <span>{!is86 ? "Add to Dawat" : "Unavailable"}</span>
                           </button>
                         ) : (
-                          <div className="flex items-center gap-3 bg-[#1e222e] border border-amber-500/60 px-3 py-1.5 rounded-xl shadow-lg">
+                          <div className="flex items-center gap-3 bg-[#231530] border-2 border-amber-400 px-3 py-1.5 rounded-xl shadow-lg">
                             <button
                               onClick={() => updateQuantity(item.id, -1)}
                               className="text-amber-400 hover:text-white p-0.5 active:scale-90"
@@ -472,20 +513,20 @@ export default function MenuPage() {
 
       {/* Floating Bottom Cart Bar for Instant <60s Checkout */}
       {cartCount > 0 && (
-        <div className="sticky bottom-0 z-40 bg-[#161822]/95 backdrop-blur-md border-t border-amber-500/30 p-4 shadow-2xl">
+        <div className="sticky bottom-0 z-40 bg-[#160d21]/95 backdrop-blur-md border-t-2 border-amber-500/40 p-4 shadow-2xl">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
             <div>
-              <div className="text-xs text-gray-400">
-                <strong className="text-white font-mono text-sm">{cartCount} items</strong> in your direct dawat
+              <div className="text-xs text-gray-300">
+                <strong className="text-white font-mono text-sm">{cartCount} items</strong> in your Diwali dawat
               </div>
-              <div className="text-lg font-mono font-extrabold text-amber-400">
+              <div className="text-lg font-mono font-extrabold text-amber-300">
                 ₹{cartTotal} <span className="text-xs font-normal text-gray-400">(Inclusive of 5% GST)</span>
               </div>
             </div>
 
             <Link
               href="/cart"
-              className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 shadow-xl shadow-amber-500/20 text-sm transition transform active:scale-95"
+              className="bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-black font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 shadow-xl shadow-amber-500/30 text-sm transition transform active:scale-95"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>Proceed to Checkout</span>
@@ -496,4 +537,3 @@ export default function MenuPage() {
     </div>
   );
 }
-

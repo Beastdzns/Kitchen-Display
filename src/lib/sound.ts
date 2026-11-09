@@ -1,6 +1,6 @@
 /**
  * Synthesizes crisp audible alert chimes using the standard Web Audio API.
- * Optimized for loud, noisy commercial kitchen tablet speakers.
+ * Optimized for loud, noisy commercial kitchen tablet speakers and festive UI interactions.
  */
 class KitchenSoundManager {
   private ctx: AudioContext | null = null;
@@ -29,6 +29,39 @@ class KitchenSoundManager {
   }
 
   /**
+   * Role Switch Celebration Chime: Tri-tone sparkling chime (C5 -> E5 -> G5)
+   */
+  public playRoleSwitchChime() {
+    if (this.isMuted) return;
+    try {
+      const ctx = this.getContext();
+      if (!ctx) return;
+
+      const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const startTime = ctx.currentTime + idx * 0.07;
+        const duration = 0.25;
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0.18, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      });
+    } catch (e) {
+      // ignore auto-play policies
+    }
+  }
+
+  /**
    * New Ticket Chime: Upward two-tone chime (880Hz -> 1320Hz)
    */
   public playNewOrderChime() {
@@ -38,7 +71,6 @@ class KitchenSoundManager {
       if (!ctx) return;
 
       const osc1 = ctx.createOscillator();
-      const osc2 = ctx.createOscillator();
       const gain = ctx.createGain();
 
       osc1.type = "sine";
@@ -88,4 +120,3 @@ class KitchenSoundManager {
 }
 
 export const kitchenSound = new KitchenSoundManager();
-

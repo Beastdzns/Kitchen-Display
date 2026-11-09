@@ -142,15 +142,19 @@ export default function CartPage() {
   }
 
   return (
-    <div className="flex-1 bg-[#0e1014] text-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="flex-1 bg-diwali-pattern text-gray-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-800">
+        <div className="flex items-center justify-between mb-8 pb-4 border-b-2 border-amber-500/40">
           <div>
+            <div className="flex items-center gap-2 text-xs font-bold text-amber-300 uppercase tracking-wider mb-1">
+              <span>🪔</span>
+              <span>Diwali Direct Checkout • Exclusive 5% Cashback</span>
+            </div>
             <h1 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
               Direct Order Checkout
             </h1>
             <p className="text-xs text-gray-400 mt-1 flex items-center gap-2">
-              <span>Delivering from: <strong className="text-amber-400">{selectedOutlet.name}</strong></span>
+              <span>Delivering from: <strong className="text-amber-300">{selectedOutlet.name}</strong></span>
               <span>•</span>
               <span className="text-emerald-400 font-mono">FSSAI #{selectedOutlet.fssaiNumber}</span>
               <span>•</span>
@@ -343,7 +347,14 @@ export default function CartPage() {
               {couponError && <p className="text-[11px] text-red-400">{couponError}</p>}
 
               {/* Quick 1-click test coupons */}
-              <div className="flex gap-2 pt-1">
+              <div className="flex flex-wrap gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => handleApplyCoupon("DIWALI20")}
+                  className="text-[10px] bg-gradient-to-r from-red-950 to-amber-950 hover:from-red-900 hover:to-amber-900 text-amber-300 px-2.5 py-1 rounded-md border border-amber-500/50 font-mono font-bold flex items-center gap-1 shadow-sm"
+                >
+                  <span>🪔</span> + DIWALI20 (20% off)
+                </button>
                 <button
                   type="button"
                   onClick={() => handleApplyCoupon("DIRECT10")}

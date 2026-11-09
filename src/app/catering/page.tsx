@@ -158,16 +158,16 @@ export default function PartyCateringPage() {
   }
 
   return (
-    <div className="flex-1 bg-[#0e1014] text-gray-100 py-10 px-4 sm:px-6 lg:px-8">
+    <div className="flex-1 bg-diwali-pattern text-gray-100 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 bg-amber-500/10 text-amber-400 border border-amber-500/30 px-3.5 py-1.5 rounded-full text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Nizami Feasts for 15 to 500+ Guests</span>
+          <div className="inline-flex items-center gap-2 bg-[#251633] text-amber-300 border border-amber-500/40 px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-md">
+            <span>🪔</span>
+            <span>Diwali Grand Dawat Feasts • 15 to 500+ Guests</span>
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-white">
-            Hyderabadi Dawat & Bulk Catering
+            Hyderabadi Diwali Dawat & Bulk Catering
           </h1>
           <p className="text-xs text-gray-400 leading-relaxed">
             Eliminating missed phone orders. Direct confirmation by our dedicated catering manager with live degh seal and authentic brass handi presentation.

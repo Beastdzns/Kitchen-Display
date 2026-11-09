@@ -134,19 +134,20 @@ export default function OrderTrackingPage() {
   const currentStageIndex = getStageIndex(order.status);
 
   return (
-    <div className="flex-1 bg-[#0e1014] text-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="flex-1 bg-diwali-pattern text-gray-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Top Header Card */}
-        <div className="bg-[#161822] border border-gray-800 rounded-2xl p-6 shadow-2xl flex flex-wrap items-center justify-between gap-4">
+        <div className="bg-[#170f22] border-2 border-amber-500/40 rounded-3xl p-6 shadow-2xl flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
+              <span className="text-xl diya-glow">🪔</span>
               <span className="font-mono text-2xl font-extrabold text-white">{order.id}</span>
-              <span className="text-xs uppercase font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+              <span className="text-xs uppercase font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
                 {order.status.replace(/_/g, " ")}
               </span>
             </div>
             <p className="text-xs text-gray-400 mt-1 flex items-center gap-2">
-              <span>Prepared at: <strong className="text-white">{outlet.name}</strong></span>
+              <span>Prepared at: <strong className="text-amber-300">{outlet.name}</strong></span>
               <span>•</span>
               <span className="text-emerald-400 font-mono">FSSAI #{outlet.fssaiNumber}</span>
             </p>

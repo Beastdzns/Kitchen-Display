@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     // Fetch customer to generate realistic notification
     const customer = db.select().from(users).where(eq(users.id, existing.customerId)).get();
-    const recipientPhone = customer?.phone || "+91 98490 12345";
+    const recipientPhone = customer?.phone || "0000000001";
 
     let messageText = "";
     if (status === "PREPARING") {
@@ -77,4 +77,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-

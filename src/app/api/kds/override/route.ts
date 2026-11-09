@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       .run();
 
     const customer = db.select().from(users).where(eq(users.id, existing.customerId)).get();
-    const recipientPhone = customer?.phone || "+91 98490 12345";
+    const recipientPhone = customer?.phone || "0000000001";
     const nowIso = new Date().toISOString();
 
     const messageText = `Company A Kitchen Update: To ensure our slow-cooked dum reaches perfection, your order ${orderId} estimated time has been extended by ${overrideMinutes} mins. New promised time: ${newPromised.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}. Thank you for your patience!`;
@@ -74,4 +74,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-

@@ -47,7 +47,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [currentUser, setCurrentUser] = useState<any>(DEMO_USERS[0]); // Default to Amina Khan
+  const [currentUser, setCurrentUser] = useState<any>(DEMO_USERS[0]); // Default to demo customer
   const [roleSwitchNotice, setRoleSwitchNotice] = useState<RoleSwitchNotification | null>(null);
   const [selectedOutlet, setSelectedOutlet] = useState<HyderabadOutletSeed>(HYDERABAD_OUTLETS[0]); // Default Kondapur
   const [cart, setCart] = useState<CartItem[]>([]);

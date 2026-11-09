@@ -66,7 +66,7 @@ export default function DemoBar() {
 
           {/* Center: Tactile Role Switcher Chips with Clear Demarcations */}
           <div className="flex items-center gap-2 overflow-x-auto py-0.5">
-            {/* 1. Customer Amina */}
+            {/* Customer demo persona */}
             <button
               onClick={() => switchPersona(DEMO_USERS[0])}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-xs transition-all duration-200 border ${
@@ -76,7 +76,7 @@ export default function DemoBar() {
               }`}
             >
               <UserCheck className="w-3.5 h-3.5 shrink-0" />
-              <span>Customer (Amina)</span>
+              <span>Customer (Demo)</span>
               <span
                 className={`text-[10px] px-1.5 py-0.2 rounded font-mono font-extrabold ${
                   currentUser.id === "cust-amina" ? "bg-black/30 text-black" : "bg-black/40 text-amber-300"
@@ -234,7 +234,7 @@ export default function DemoBar() {
                     <input
                       type="tel"
                       required
-                      placeholder="98490 12345"
+                      placeholder="0000000001"
                       value={phoneInput}
                       onChange={(e) => setPhoneInput(e.target.value)}
                       className="w-full bg-[#241733] border border-gray-700 rounded-xl pl-12 pr-4 py-2.5 text-white font-mono focus:outline-none focus:border-amber-500 text-sm"
@@ -257,7 +257,7 @@ export default function DemoBar() {
               <form onSubmit={handleVerifyOtp} className="space-y-4">
                 <div className="bg-emerald-950/40 border border-emerald-600/40 p-3 rounded-xl text-xs text-emerald-300 flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Demo OTP sent to {phoneInput || "+91 98490 12345"}. Pre-filled below:</span>
+                  <span>Demo OTP sent to {phoneInput || "0000000001"}. Pre-filled below:</span>
                 </div>
 
                 <div>

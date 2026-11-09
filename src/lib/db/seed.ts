@@ -243,7 +243,7 @@ export function runSeed() {
       description: "Signature slow-cooked Hyderabadi dum biryani with tender farm-fresh chicken, fragrant aged basmati rice, saffron, served with mirchi ka salan and burani raita.",
       base_price: 890,
       portion_size: "Family Pack (Serves 3-4)",
-      image_url: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80",
+      image_url: "/assets/chicken-dum-biryani.webp",
       is_veg: 0,
       spice_level: "MEDIUM",
       allergens: JSON.stringify(["Dairy"]),
@@ -258,7 +258,7 @@ export function runSeed() {
       description: "The crown jewel of Hyderabad. Succulent chicken pieces marinated in curd and secret spices, cooked on slow dum flame with long grain basmati rice.",
       base_price: 360,
       portion_size: "Regular (Serves 1-2)",
-      image_url: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80",
+      image_url: "/assets/chicken-dum-biryani.webp",
       is_veg: 0,
       spice_level: "MEDIUM",
       allergens: JSON.stringify(["Dairy"]),
@@ -303,7 +303,7 @@ export function runSeed() {
       description: "World-famous GI-tagged delicacy. Tender mutton pounded continuously for 8 hours with broken wheat, pure ghee, lentils, cinnamon and fried onions.",
       base_price: 350,
       portion_size: "Portion (500ml)",
-      image_url: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80",
+      image_url: "/assets/mutton-haleem.webp",
       is_veg: 0,
       spice_level: "MEDIUM",
       allergens: JSON.stringify(["Dairy", "Gluten"]),
@@ -333,7 +333,7 @@ export function runSeed() {
       description: "Deep-fried crispy bread soaked in saffron-cardamom whole milk rabri, garnished with toasted silvered almonds and pistachios.",
       base_price: 145,
       portion_size: "Pack of 2 Pieces",
-      image_url: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&auto=format&fit=crop&q=80",
+      image_url: "/assets/double-ka-meetha.webp",
       is_veg: 1,
       spice_level: "MILD",
       allergens: JSON.stringify(["Dairy", "Gluten", "Nuts"]),
@@ -566,7 +566,7 @@ export function runSeed() {
     0,
     null,
     0,
-    "Flat 402, Aditya Sunshine, Whitefields, Kondapur, Hyderabad 500084",
+    "Demo address, Kondapur, Hyderabad",
     17.469,
     78.358,
     "Extra burani raita and salan packets please."
@@ -579,8 +579,8 @@ export function runSeed() {
     "notif-1-1",
     "WEB-778120",
     "WHATSAPP",
-    "+91 98490 12345",
-    "Salaam Amina! Your order WEB-778120 has been accepted by Company A Kondapur. Our chefs are simmering your Chicken Dum Biryani Family Pack on dum. Promised by 20:59. Track live: https://companya.in/order/WEB-778120",
+    "0000000001",
+    "Your order WEB-778120 has been accepted by Company A Kondapur. Our chefs are preparing your Chicken Dum Biryani Family Pack. Promised by 20:59. Track live: http://localhost:3000/order/WEB-778120",
     placed1.toISOString(),
     "DELIVERED"
   );
@@ -611,7 +611,7 @@ export function runSeed() {
     0,
     new Date(placed2.getTime() + 38 * 60000).toISOString(),
     0,
-    "Tower 3, Apt 804, My Home Bhooja, Gachibowli, Hyderabad 500032",
+    "Demo address, Gachibowli, Hyderabad",
     17.441,
     78.35,
     "Leave at security desk."
@@ -624,7 +624,7 @@ export function runSeed() {
     "notif-2-1",
     "WEB-778131",
     "WHATSAPP",
-    "+91 98490 12345",
+    "0000000001",
     "Your order WEB-778131 is packed and fresh out of the Gachibowli Cloud Kitchen! Our delivery partner is handing it off now.",
     new Date(placed2.getTime() + 38 * 60000).toISOString(),
     "DELIVERED"
@@ -658,7 +658,7 @@ export function runSeed() {
     0,
     null,
     1, // Late alert triggered!
-    "House 14, 5th Cross, Bhagyanagar Colony, Kukatpally, Hyderabad 500072",
+    "Demo address, Kukatpally, Hyderabad",
     17.495,
     78.4,
     "Call before arrival."
@@ -670,7 +670,7 @@ export function runSeed() {
     "notif-3-1",
     "WEB-778146",
     "SMS",
-    "+91 98490 12345",
+    "0000000001",
     "Company A Alert: Order WEB-778146 is experiencing a slight delay due to high kitchen volume at Kukatpally. Chef is plating your Mutton Haleem now. Thank you for your patience!",
     new Date(promised3.getTime() + 4 * 60000).toISOString(),
     "DELIVERED"
@@ -688,8 +688,8 @@ export function runSeed() {
     "cust-amina",
     new Date(Date.now() + 48 * 3600000).toISOString().split("T")[0],
     40,
-    "Amina Khan (Corporate Family Dawat)",
-    "+91 98490 12345",
+    "Demo Customer",
+    "0000000001",
     "Shahi Nizami Dawat Package",
     "40 guests. Require 2 handis of Mutton Dum Biryani, 1 handi Veg Biryani, Chicken 65, Double ka Meetha and 40 clay kulhads of Irani Chai.",
     24000,
@@ -699,7 +699,7 @@ export function runSeed() {
     nowIso
   );
 
-  // 8. Seed Loyalty Ledger entries for Amina
+  // 8. Seed loyalty ledger entries for the demo customer
   const insertLoyalty = sqlite.prepare(`
     INSERT INTO loyalty_ledger (id, user_id, order_id, points_change, reason, created_at)
     VALUES (?, ?, ?, ?, ?, ?)
@@ -715,4 +715,3 @@ export function runSeed() {
 if (require.main === module || process.argv[1]?.includes("seed.ts")) {
   runSeed();
 }
-

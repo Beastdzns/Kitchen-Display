@@ -163,7 +163,7 @@ export async function POST(req: NextRequest) {
       .run();
 
     // 6. Insert simulated WhatsApp notification
-    const recipientPhone = customer?.phone || "+91 98490 12345";
+    const recipientPhone = customer?.phone || "0000000001";
     const notifMsg = `Company A Order Confirmed! Order #${orderId} has been sent directly to the ${outlet.name} kitchen screen. AI estimated prep: ${prepPrediction.promisedMinutes} mins (${prepPrediction.explanation}). Promised by ${promisedTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}. Track live: http://localhost:3000/order/${orderId}`;
 
     db.insert(auditNotifications)
@@ -210,4 +210,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-

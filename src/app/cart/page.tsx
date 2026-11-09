@@ -40,7 +40,7 @@ export default function CartPage() {
   const [couponInput, setCouponInput] = useState<string>(appliedCoupon || "");
   const [couponError, setCouponError] = useState<string>("");
   const [deliveryAddress, setDeliveryAddress] = useState<string>(
-    "Flat 402, Aditya Sunshine, Whitefields, Kondapur, Hyderabad 500084"
+    "Demo address, Kondapur, Hyderabad"
   );
   const [customerNotes, setCustomerNotes] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<"UPI" | "CARD">("UPI");
@@ -510,4 +510,3 @@ export default function CartPage() {
     </div>
   );
 }
-

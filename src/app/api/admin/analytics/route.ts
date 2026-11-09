@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
         ? Number((((totalOrdersCount - lateOrdersCount) / totalOrdersCount) * 100).toFixed(1))
         : 100;
 
-    // Repeat customers calculation (Amina Khan has multiple orders)
+    // Repeat customer calculation uses the seeded demo orders.
     const customerOrderCounts = new Map<string, number>();
     for (const o of allOrders) {
       customerOrderCounts.set(o.customerId, (customerOrderCounts.get(o.customerId) || 0) + 1);
@@ -81,4 +81,3 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
-

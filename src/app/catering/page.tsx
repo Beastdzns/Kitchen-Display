@@ -23,8 +23,8 @@ export default function PartyCateringPage() {
   const [guestCount, setGuestCount] = useState<number>(25);
   const [eventDate, setEventDate] = useState<string>(tomorrow);
   const [selectedPackage, setSelectedPackage] = useState<string>("ROYAL_NIZAMI");
-  const [contactName, setContactName] = useState<string>("Amina Khan");
-  const [contactPhone, setContactPhone] = useState<string>("+91 98490 12345");
+  const [contactName, setContactName] = useState<string>("Demo Customer");
+  const [contactPhone, setContactPhone] = useState<string>("0000000001");
   const [preferredOutlet, setPreferredOutlet] = useState<string>("kondapur");
   const [customNotes, setCustomNotes] = useState<string>(
     "Corporate family dawat. Request brass-finish insulated handis and clay kulhads for tea."
@@ -121,7 +121,7 @@ export default function PartyCateringPage() {
           <h2 className="font-serif text-3xl font-bold text-white">Party Order Received!</h2>
           <div className="font-mono text-2xl font-extrabold text-amber-400">{submittedPartyId}</div>
           <p className="text-xs text-gray-300 leading-relaxed">
-            Salaam {contactName}! Your corporate/family dawat request for <strong>{guestCount} guests</strong> has been forwarded to Farhan Siddiqui (Catering Lead) and the master chefs at {HYDERABAD_OUTLETS.find((o) => o.id === preferredOutlet)?.name}.
+            Hello {contactName}! Your corporate/family dawat request for <strong>{guestCount} guests</strong> has been forwarded to the catering desk and kitchen team at {HYDERABAD_OUTLETS.find((o) => o.id === preferredOutlet)?.name}.
           </p>
           <div className="bg-[#12141a] p-4 rounded-xl border border-gray-800 text-xs text-gray-400 space-y-1">
             <div className="flex justify-between">
@@ -378,7 +378,7 @@ export default function PartyCateringPage() {
                   <span>2-Hour Manager Confirmation SLA</span>
                 </div>
                 <p className="text-[11px] text-gray-400 leading-relaxed">
-                  Farhan Siddiqui (Catering Lead) will review handi allocation, confirm staff availability, and send your finalized quote with payment link via WhatsApp.
+                  The catering manager will review handi allocation, confirm staff availability, and send your finalized quote with payment link through the demo notification flow.
                 </p>
               </div>
 
@@ -397,4 +397,3 @@ export default function PartyCateringPage() {
     </div>
   );
 }
-

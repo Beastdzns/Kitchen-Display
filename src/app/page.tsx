@@ -76,7 +76,15 @@ export default function HomePage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-gray-800/80">
+      <section
+        className="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-gray-800/80"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(13, 10, 17, 0.96) 0%, rgba(13, 10, 17, 0.82) 48%, rgba(13, 10, 17, 0.42) 100%), url('/assets/hero-dawat.webp')",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Col: Headlines & Value Prop */}
@@ -164,7 +172,7 @@ export default function HomePage() {
               {/* Food Visual Card with Golden Diwali Lighting */}
               <div className="relative rounded-3xl overflow-hidden border-2 border-amber-500/40 shadow-2xl group">
                 <img
-                  src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80"
+                  src="/assets/chicken-dum-biryani.webp"
                   alt="Hyderabadi Chicken Dum Biryani"
                   className="w-full h-80 object-cover group-hover:scale-105 transition duration-500"
                 />

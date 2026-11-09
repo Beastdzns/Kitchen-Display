@@ -36,8 +36,12 @@ export default function Navbar() {
           {/* Brand Logo with Festive Diya & Heritage Title */}
           <div className="flex items-center gap-5">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center text-black font-extrabold shadow-lg shadow-amber-500/25 group-hover:scale-105 transition-transform duration-300 border border-amber-300/40 relative">
-                <span className="text-xl">🪔</span>
+              <div className="w-11 h-11 rounded-2xl bg-[#120a17] flex items-center justify-center shadow-lg shadow-amber-500/25 group-hover:scale-105 transition-transform duration-300 border border-amber-300/40 relative overflow-hidden">
+                <img
+                  src="/assets/logo-royal-diya.webp"
+                  alt="Royal Diya"
+                  className="w-full h-full object-cover"
+                />
                 <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-300 animate-ping" />
               </div>
               <div>

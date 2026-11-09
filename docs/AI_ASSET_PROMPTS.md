@@ -112,3 +112,15 @@ When running these in any modern text-to-image pipeline:
   ```
   oversaturated, cartoonish, low quality, blurry, deformed meat, plastic rice, neon green, artificial lighting, text watermark, signature, stock watermark, duplicate items, bad framing, cut off
   ```
+
+## 5. Supplied Assets Integrated
+
+The generated source PNGs remain in `assets/`. Optimized WebP versions are served from `public/assets/` and used in the application:
+
+| Source | Public asset | Application use |
+|---|---|---|
+| `assets/a.png` | `hero-dawat.webp` | Homepage hero backdrop |
+| `assets/b.png` | `double-ka-meetha.webp` | Double Ka Meetha menu image |
+| `assets/c.png` | `chicken-dum-biryani.webp` | Homepage and chicken biryani menu images |
+| `assets/d.png` | `mutton-haleem.webp` | Mutton Haleem menu image |
+| `assets/e.png` | `logo-royal-diya.webp` | Navigation brand emblem |

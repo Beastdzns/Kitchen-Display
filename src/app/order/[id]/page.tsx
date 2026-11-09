@@ -333,7 +333,7 @@ export default function OrderTrackingPage() {
               <h3 className="text-lg font-bold text-white">Simulated WhatsApp & SMS Stream</h3>
             </div>
             <p className="text-xs text-gray-400">
-              Automated message delivery audit trail for {customer?.phone || "+91 98490 12345"}:
+              Automated message delivery audit trail for {customer?.phone || "0000000001"}:
             </p>
 
             <div className="max-h-72 overflow-y-auto space-y-3 py-2">
@@ -369,4 +369,3 @@ export default function OrderTrackingPage() {
     </div>
   );
 }
-
